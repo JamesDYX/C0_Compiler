@@ -3,8 +3,8 @@
 #include <fstream>
 #define MISS_TOKEN  {									\
 					reportError(E_MISS_TOKEN);			\
-					char until[2] = { ';','\n' };		\
-					skip(until, 2);						\
+					char until[3] = { ';','\n','}' };		\
+					skip(until, 3);						\
 					curState = E_MISS_TOKEN;			\
 					}
 
