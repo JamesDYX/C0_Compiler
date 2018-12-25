@@ -1,4 +1,4 @@
-#define E_END_FILE 1
+ï»¿#define E_END_FILE 1
 #define E_TOO_LONG 2
 #define E_IN_NOTE 3
 #define E_NO_EQUAL 4
@@ -16,13 +16,13 @@
 #define E_UNDEF 14
 #define E_INEF_PARA 15
 #define E_SUR_PARA 16
-#define E_UN_MATCH 17	//ÀàĞÍ²»Æ¥Åä£¬ÓÃÓÚint char voidÖ®¼ä²»Æ¥ÅäµÄ´íÎó
-#define E_VAL_VAR 18	//ÊÔÍ¼ĞŞ¸Ä³£Á¿µÄÖµ
-#define E_RET 19 //·µ»ØÖµÀàĞÍ²»Æ¥Åä
-#define E_PARA_LSIT 20//ÓëĞÎ²Î±íÀàĞÍ²»Æ¥Åä
-#define E_NO_RET 21 //È±ÉÙreturnÓï¾ä
+#define E_UN_MATCH 17	//ç±»å‹ä¸åŒ¹é…ï¼Œç”¨äºint char voidä¹‹é—´ä¸åŒ¹é…çš„é”™è¯¯
+#define E_VAL_VAR 18	//è¯•å›¾ä¿®æ”¹å¸¸é‡çš„å€¼
+#define E_RET 19 //è¿”å›å€¼ç±»å‹ä¸åŒ¹é…
+#define E_PARA_LSIT 20//ä¸å½¢å‚è¡¨ç±»å‹ä¸åŒ¹é…
+#define E_NO_RET 21 //ç¼ºå°‘returnè¯­å¥
 
-#define E_OUT_BOUND	22//Êı×éÔ½½ç¼ì²é
+#define E_OUT_BOUND	22//æ•°ç»„è¶Šç•Œæ£€æŸ¥
 
 void reportError(int ERROR_NUM);
 void skip(char * untilToken, int size);

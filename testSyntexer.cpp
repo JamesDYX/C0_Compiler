@@ -1,4 +1,4 @@
-#include "getSym.h"
+﻿#include "getSym.h"
 #include <iostream>
 #include "syntaxAnalys.h"
 #include "midCode.h"
@@ -6,8 +6,8 @@
 #include "error.h"
 using namespace std;
 int main() {
-	string fileName = "";
-	cin >> fileName;
+	char fileName[100];
+	cin.getline(fileName, 100);
 	sourceFile.open(fileName);
 
 	curChar = sourceFile.get();
@@ -21,6 +21,8 @@ int main() {
 	MidCode.outPut(tetraCodeFile);
 	objectCode MIPS;
 	MIPS.printMips();
-	system("pause");
+
+	cout << "Press any key to continue..." << endl;
+	cin.get();
 	return 0;
 }

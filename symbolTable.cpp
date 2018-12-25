@@ -1,4 +1,4 @@
-#include "symbolTable.h"
+ï»¿#include "symbolTable.h"
 symbolTable Table;
 
 
@@ -18,11 +18,11 @@ int symbolTable::find(struct tableNodeId id, struct tableNode *node)
 		return -1;
 }
 
-int symbolTable::insert(struct tableNode node, int force)	//Èç¹ûÒÑ¾­´æÔÚÔò·µ»Ø-1£¬·ñÔò²åÈë·ûºÅ±í²¢·µ»Ø0
+int symbolTable::insert(struct tableNode node, int force)	//å¦‚æžœå·²ç»å­˜åœ¨åˆ™è¿”å›ž-1ï¼Œå¦åˆ™æ’å…¥ç¬¦å·è¡¨å¹¶è¿”å›ž0
 {
 	tableNode re;
 	int in = this->find(node.id, &re);
-	if (in != 0 || re.id.lev != node.id.lev) { //²»´æÔÚ¶ÔÓ¦Öµ»òÕß¶ÔÓ¦Öµ²ã¼¶²»Í¬
+	if (in != 0 || re.id.lev != node.id.lev) { //ä¸å­˜åœ¨å¯¹åº”å€¼æˆ–è€…å¯¹åº”å€¼å±‚çº§ä¸åŒ
 		this->table[node.id] = node;
 		return 0;
 	}

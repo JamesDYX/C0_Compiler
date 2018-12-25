@@ -1,4 +1,4 @@
-#include "getSym.h"
+ï»¿#include "getSym.h"
 #include "symbol.h"
 #include "error.h"
 #include <ctype.h>
@@ -87,7 +87,7 @@ int getSym() {
 			}
 		}
 		else if (STATE == SLASH) {
-			// ÈôÏëÊ¹ÎÄ·¨Ö§³Ö×¢ÊÍ£¬È¡ÏûÒÔÏÂ×¢ÊÍ¼´¿É
+			// è‹¥æƒ³ä½¿æ–‡æ³•æ”¯æŒæ³¨é‡Šï¼Œå–æ¶ˆä»¥ä¸‹æ³¨é‡Šå³å¯
 			//if (curChar == '/')
 			//	moveState(&STATE, SINGNOTE);
 			//else if (curChar == '*')

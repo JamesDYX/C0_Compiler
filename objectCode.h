@@ -1,4 +1,4 @@
-#include <string>
+ï»¿#include <string>
 #include "midCode.h"
 #include <map>
 #include <fstream>
@@ -52,8 +52,8 @@ public:
 	void addNode(tetraCode midCode);
 	void printMips();
 private:
-	int relative_address;	//Ïà¶ÔÓÚµ±Ç°º¯ÊıÖ¸ÕëµÄµØÖ·
-	int push_address;		//Ñ¹Èëº¯Êı²ÎÊıµÄµØÖ·
+	int relative_address;	//ç›¸å¯¹äºå½“å‰å‡½æ•°æŒ‡é’ˆçš„åœ°å€
+	int push_address;		//å‹å…¥å‡½æ•°å‚æ•°çš„åœ°å€
 	bool begindef = false;
 	int end_golbal_address = 0;
 	objectNode * fp;

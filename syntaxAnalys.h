@@ -1,4 +1,4 @@
-#include "error.h"
+ï»¿#include "error.h"
 #include "symbolTable.h"
 #include <fstream>
 #define MISS_TOKEN  {									\
@@ -36,7 +36,7 @@ int recgFactor(int level, struct tableNode * tmpnode);
 int recgStatement(int level);
 int recgAssign(int level);
 int recgIf(int level);
-int recgCondition(int level,char *  Label, bool satisfy);	//Éú³ÉÒ»¸öÌø×ªÓï¾ä, satisfyÎªÕæÔòÂú×ãÌõ¼şÊ±Ìø×ª£¬·ñÔòÎª²»Âú×ãÊ±Ìø×ª
+int recgCondition(int level,char *  Label, bool satisfy);	//ç”Ÿæˆä¸€ä¸ªè·³è½¬è¯­å¥, satisfyä¸ºçœŸåˆ™æ»¡è¶³æ¡ä»¶æ—¶è·³è½¬ï¼Œå¦åˆ™ä¸ºä¸æ»¡è¶³æ—¶è·³è½¬
 int recgRepeat(int level);
 int recgIFuncCall(int level, struct tableNode * tmpnode);
 int recgNFuncCall(int level);

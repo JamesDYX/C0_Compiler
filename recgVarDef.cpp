@@ -1,4 +1,4 @@
-#include "syntaxAnalys.h"
+Ôªø#include "syntaxAnalys.h"
 #include <iostream>
 #include "getSym.h"
 #include "error.h"
@@ -20,10 +20,10 @@ int recgVarDef(int level) {
 		getSym();
 		if (curSym.getType() != ID_SYM) throw(E_NOT_THIS);
 		node.id.lev = level;
-		strcpy_s(node.id.name, curSym.getValueStr());
+		strcpy(node.id.name, curSym.getValueStr());
 		getSym();
 		if (curSym.getType() == LBRACKET_SYM) {
-			// ˝◊È
+			//Êï∞ÁªÑ
 			node.kind = TB_ARRAY;
 			getSym();
 			if (curSym.getType() != UNSNUM_SYM) MISS_TOKEN
@@ -39,9 +39,9 @@ int recgVarDef(int level) {
 			getSym();
 		}
 		else if (curSym.getType() == COMMA_SYM || curSym.getType() == SEMICOL_SYM) {
-			//±‰¡ø
+			//ÂèòÈáè
 			node.kind = TB_VAR;
-			node.val = 0;																										////////
+			node.val = 0;																						
 			if (Table.insert(node) != 0)
 				reportError(E_REDEF);
 			else
@@ -59,10 +59,10 @@ int recgVarDef(int level) {
 			getSym();
 			if (curSym.getType() != ID_SYM) MISS_TOKEN
 			node.id.lev = level;
-			strcpy_s(node.id.name, curSym.getValueStr());
+			strcpy(node.id.name, curSym.getValueStr());
 			getSym();
 			if (curSym.getType() == LBRACKET_SYM) {
-				//TODO ˝◊È
+				//TODOÊï∞ÁªÑ
 				node.kind = TB_ARRAY;
 				getSym();
 				if (curSym.getType() != UNSNUM_SYM) MISS_TOKEN
@@ -80,7 +80,7 @@ int recgVarDef(int level) {
 			else {
 				node.kind = TB_VAR;
 				node.val = 0;																							///////////////
-				//TODO±Í ∂∑˚
+				//TODOÊ†áËØÜÁ¨¶
 				if (Table.insert(node) != 0)
 					reportError(E_REDEF);
 				else

@@ -1,4 +1,4 @@
-#ifndef MIDCODE_H
+ï»¿#ifndef MIDCODE_H
 #define MIDCODE_H
 #include<cstdlib>
 #include<cstring>
@@ -7,16 +7,16 @@
 #define STR_MAX_LEN 1000
 #define ZERO (char *)"&zero"
 
-#define CONST_I 1	//ÕûĞÍ³£Á¿¶¨Òå
-#define CONST_C 2	//×Ö·ûĞÍ³£Á¿¶¨Òå
-#define FUNC_DEF 3		//º¯Êı¶¨Òå
-#define PARA_I 4		//ÕûĞÍ²ÎÊı
-#define PARA_C 5		//×Ö·ûĞÍ²ÎÊı
+#define CONST_I 1	//æ•´å‹å¸¸é‡å®šä¹‰
+#define CONST_C 2	//å­—ç¬¦å‹å¸¸é‡å®šä¹‰
+#define FUNC_DEF 3		//å‡½æ•°å®šä¹‰
+#define PARA_I 4		//æ•´å‹å‚æ•°
+#define PARA_C 5		//å­—ç¬¦å‹å‚æ•°
 
-#define VAR_I 6		//ÕûĞÍ±äÁ¿¶¨Òå
-#define VAR_C 7		//×Ö·û±äÁ¿¶¨Òå
-#define ARRAY_I 8	//ÕûĞÍÊı×é¶¨Òå
-#define ARRAY_C	9	//×Ö·ûÊı×é¶¨Òå
+#define VAR_I 6		//æ•´å‹å˜é‡å®šä¹‰
+#define VAR_C 7		//å­—ç¬¦å˜é‡å®šä¹‰
+#define ARRAY_I 8	//æ•´å‹æ•°ç»„å®šä¹‰
+#define ARRAY_C	9	//å­—ç¬¦æ•°ç»„å®šä¹‰
 
 #define ADD 10
 #define SUB 11
@@ -27,29 +27,29 @@
 #define SAVE_I 16
 #define SAVE_C 17
 
-#define CALL 18		//µ÷ÓÃº¯Êı
-#define GET_RET_I 19		//·µ»Øº¯Êı
+#define CALL 18		//è°ƒç”¨å‡½æ•°
+#define GET_RET_I 19		//è¿”å›å‡½æ•°
 #define GET_RET_C 34
-#define PUSH_I 20		//µ÷ÓÃº¯ÊıÇ°½«²ÎÊıÑ¹Õ»
-#define PUSH_C 35		//µ÷ÓÃº¯ÊıÇ°½«²ÎÊıÑ¹Õ»
+#define PUSH_I 20		//è°ƒç”¨å‡½æ•°å‰å°†å‚æ•°å‹æ ˆ
+#define PUSH_C 35		//è°ƒç”¨å‡½æ•°å‰å°†å‚æ•°å‹æ ˆ
 
-#define BEQ 21		//¸÷ÖÖÌø×ª
+#define BEQ 21		//å„ç§è·³è½¬
 #define BNE 22
 #define BGT 23
 #define BGE 24
 
-#define LAB 25		//Éú³É±êÇ©
+#define LAB 25		//ç”Ÿæˆæ ‡ç­¾
 
-#define READ_I 26	//¶ÁÕûÊı
-#define READ_C 27	//¶Á×Ö·û
+#define READ_I 26	//è¯»æ•´æ•°
+#define READ_C 27	//è¯»å­—ç¬¦
 
 #define PRINT_S 28
 #define PRINT_I 29
 #define PRINT_C 30
 
-#define RET_V 31	//·µ»Ø¿Õ
-#define RET_I 32	//·µ»ØÕûĞÍ
-#define RET_C 33	//·µ»Ø×Ö·ûÀàĞÍ
+#define RET_V 31	//è¿”å›ç©º
+#define RET_I 32	//è¿”å›æ•´å‹
+#define RET_C 33	//è¿”å›å­—ç¬¦ç±»å‹
 
 #define JUMP 36
 #define NOP 37
@@ -70,7 +70,7 @@ struct tetraCode
 		int rt_num;
 	};
 
-	struct tetraCode* next;	//²ÉÓÃÁ´±íµÄĞÎÊ½×éÖ¯ËÄÔªÊ½
+	struct tetraCode* next;	//é‡‡ç”¨é“¾è¡¨çš„å½¢å¼ç»„ç»‡å››å…ƒå¼
 };
 
 class midCode
@@ -97,18 +97,18 @@ public:
 		strcpy(func_name, "");
 	}
 	
-	struct tetraCode* add(int op, char* rd, int rs_num);	//²Ù×÷·û rd Êı×Ö
-	struct tetraCode* add(int op, char* rd = (char*)NULL, char* rs = (char*)NULL, char* rt = (char*)NULL);	//²Ù×÷·û rd rs rt
-	struct tetraCode* add(struct tetraCode* code);	//Ö±½ÓÌí¼ÓËÄÔªÊ½
+	struct tetraCode* add(int op, char* rd, int rs_num);	//æ“ä½œç¬¦ rd æ•°å­—
+	struct tetraCode* add(int op, char* rd = (char*)NULL, char* rs = (char*)NULL, char* rt = (char*)NULL);	//æ“ä½œç¬¦ rd rs rt
+	struct tetraCode* add(struct tetraCode* code);	//ç›´æ¥æ·»åŠ å››å…ƒå¼
 	
 	int add_head(char* dst_name, char* src_name);
 
-	/*ÎªÁËÖ§³Ö·ÇÏßĞÔÉú³ÉÖĞ¼ä´úÂë£¬Ìí¼ÓÒÔÏÂº¯Êı(ÓÃÓÚswitchÓï¾äºÍº¯Êıµ÷ÓÃÓï¾ä)
-	 *½«½Úµã²åÈëµ½Ö¸¶¨µÄheadÎª¿ªÍ·µÄÁ´ÖĞ
+	/*ä¸ºäº†æ”¯æŒéçº¿æ€§ç”Ÿæˆä¸­é—´ä»£ç ï¼Œæ·»åŠ ä»¥ä¸‹å‡½æ•°(ç”¨äºswitchè¯­å¥å’Œå‡½æ•°è°ƒç”¨è¯­å¥)
+	 *å°†èŠ‚ç‚¹æ’å…¥åˆ°æŒ‡å®šçš„headä¸ºå¼€å¤´çš„é“¾ä¸­
 	*/
 	struct tetraCode* addn(struct tetraCode& head, int op, char* rd, int rs_num);
 	struct tetraCode* addn(struct tetraCode& head, int op, char* rd = (char*)NULL, char* rs = (char*)NULL, char* rt = (char*)NULL);
-	//½«head¿ªÍ·µÄÁ´²åÈëµ½Ö÷Á´ÖĞ
+	//å°†headå¼€å¤´çš„é“¾æ’å…¥åˆ°ä¸»é“¾ä¸­
 	struct tetraCode* insert(struct tetraCode head, struct tetraCode*node_pre);
 
 	void outPut(ofstream &tetraCodeFile);

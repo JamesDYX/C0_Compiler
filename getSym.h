@@ -1,4 +1,4 @@
-#include <stdio.h>
+ï»¿#include <stdio.h>
 #include <fstream>
 #include "symbol.h"
 #include "error.h"
@@ -7,21 +7,21 @@ using namespace std;
 #define START 0
 #define END 1
 #define ERROR 2
-#define SLASH 3		//¶Áµ½/
-#define SINGLCH0 4	//¶Áµ½+-ºÅ
-#define SIGNINT 5	//¶Áµ½+1346
-#define SINGLCH1 6	//¶Áµ½,()[];
-#define SINGLCH2 7	//¶Áµ½<>=
-#define DOUBLCH0 8	//¶Áµ½!
+#define SLASH 3		//è¯»åˆ°/
+#define SINGLCH0 4	//è¯»åˆ°+-å·
+#define SIGNINT 5	//è¯»åˆ°+1346
+#define SINGLCH1 6	//è¯»åˆ°,()[];
+#define SINGLCH2 7	//è¯»åˆ°<>=
+#define DOUBLCH0 8	//è¯»åˆ°!
 #define DOUBLCH1 9	//!=
-#define CHARACH0 10	//¶Áµ½'
-#define CHARACH1 11	//¶Áµ½'a
-#define CHARACH2 12	//¶Áµ½'a'
-#define STR0 13		//¶Áµ½"
-#define STR1 14		//¶Áµ½"abcd
-#define STR2 15		//¶Áµ½"abc"
-#define WORD 16		//¶Áµ½toupper_1
-#define NUM 17		//¶Áµ½123456
+#define CHARACH0 10	//è¯»åˆ°'
+#define CHARACH1 11	//è¯»åˆ°'a
+#define CHARACH2 12	//è¯»åˆ°'a'
+#define STR0 13		//è¯»åˆ°"
+#define STR1 14		//è¯»åˆ°"abcd
+#define STR2 15		//è¯»åˆ°"abc"
+#define WORD 16		//è¯»åˆ°toupper_1
+#define NUM 17		//è¯»åˆ°123456
 #define SINGNOTE 18
 #define MULTNOTE0 19
 #define MULTNOTE1 20
@@ -53,7 +53,7 @@ enum wordType {
 	LESSEQ_SYM,
 	GREATEQ_SYM,
 
-	//±£Áô×Ö
+	//ä¿ç•™å­—
 	CONST_SYM,
 	INT_SYM,
 	CHAR_SYM,
@@ -67,10 +67,10 @@ enum wordType {
 	FOR_SYM,
 	WHILE_SYM,
 
-	//·ÇÒ»·ûÒ»Àà
+	//éä¸€ç¬¦ä¸€ç±»
 	CHARACH_SYM,
-	NUM_SYM,	//ÓĞ·ûºÅÕûÊı
-	UNSNUM_SYM,	//ÎŞ·ûºÅÕûÊı
+	NUM_SYM,	//æœ‰ç¬¦å·æ•´æ•°
+	UNSNUM_SYM,	//æ— ç¬¦å·æ•´æ•°
 	ID_SYM,
 	STR_SYM,
 	

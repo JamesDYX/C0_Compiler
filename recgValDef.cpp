@@ -1,4 +1,4 @@
-#include "syntaxAnalys.h"
+﻿#include "syntaxAnalys.h"
 #include <iostream>
 #include "getSym.h"
 #include "error.h"
@@ -21,7 +21,7 @@ int recgValDef(int level) {
 				skip(until, 2);
 				curState = E_MISS_TOKEN;
 			}
-			strcpy_s(node.id.name, curSym.getValueStr());
+			strcpy(node.id.name, curSym.getValueStr());
 			node.id.lev = level;
 			node.kind = TB_CONST;
 			node.type = INT_SYM;
@@ -65,7 +65,7 @@ int recgValDef(int level) {
 					skip(until, 2);
 					curState = E_MISS_TOKEN;
 				}
-				strcpy_s(node.id.name, curSym.getValueStr());
+				strcpy(node.id.name, curSym.getValueStr());
 				node.id.lev = level;
 				node.kind = TB_CONST;
 				node.type = INT_SYM;
@@ -112,7 +112,7 @@ int recgValDef(int level) {
 				skip(until, 2);
 				curState = E_MISS_TOKEN;
 			}
-			strcpy_s(node.id.name, curSym.getValueStr());
+			strcpy(node.id.name, curSym.getValueStr());
 			node.id.lev = level;
 			node.kind = TB_CONST;
 			node.type = CHAR_SYM;
@@ -151,7 +151,7 @@ int recgValDef(int level) {
 					skip(until, 2);
 					curState = E_MISS_TOKEN;
 				}
-				strcpy_s(node.id.name, curSym.getValueStr());
+				strcpy(node.id.name, curSym.getValueStr());
 				node.id.lev = level;
 				node.kind = TB_CONST;
 				node.type = CHAR_SYM;

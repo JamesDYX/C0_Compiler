@@ -1,4 +1,4 @@
-#include "syntaxAnalys.h"
+ï»¿#include "syntaxAnalys.h"
 #include <iostream>
 #include "getSym.h"
 #include "error.h"
@@ -25,7 +25,7 @@ int recgAssign(int level) {
 		}
 		if (node.kind == TB_IFUNC || node.kind == TB_NFUNC) throw E_NOT_THIS;
 		else if (node.kind == TB_VAR) {
-			//ÊÇ±äÁ¿
+			//æ˜¯å˜é‡
 			getSym();
 			if (curSym.getType() != ASSIGN_SYM) MISS_TOKEN;
 			getSym();
@@ -42,7 +42,7 @@ int recgAssign(int level) {
 			return 0;
 		}
 		else if (node.kind == TB_ARRAY) {
-			//ÊÇÊı×é
+			//æ˜¯æ•°ç»„
 			getSym();
 			if (curSym.getType() != LBRACKET_SYM) MISS_TOKEN;
 			getSym();

@@ -1,4 +1,4 @@
-#include "midCode.h"
+ï»¿#include "midCode.h"
 #include <cstdio>
 #pragma warning(disable : 4996)
 #include <fstream>
@@ -213,12 +213,12 @@ int midCode::add_head(char* dst_name, char* src_name)
 		strcpy(dst_name, "");
 		return 0;
 	}
-	if (0 == strcmp(src_name, ZERO)) //ÈôºãÎª0
+	if (0 == strcmp(src_name, ZERO)) //è‹¥æ’ä¸º0
 	{
 		sprintf(dst_name, ":%s", src_name);
 	}
 	else
-		if (src_name[0] == '&') //&ÊÇÁÙÊ±±äÁ¿, ^ÊÇ±êÇ©(Ã»ÓĞ·ÅÈë·ûºÅ±í£¬Ò²²»ĞèÒª)
+		if (src_name[0] == '&') //&æ˜¯ä¸´æ—¶å˜é‡, ^æ˜¯æ ‡ç­¾(æ²¡æœ‰æ”¾å…¥ç¬¦å·è¡¨ï¼Œä¹Ÿä¸éœ€è¦)
 		{
 			sprintf(dst_name, "%s:%s", this->func_name, src_name);
 		}
@@ -230,9 +230,9 @@ int midCode::add_head(char* dst_name, char* src_name)
 			strcpy(node.id.name, src_name);
 			node.id.lev = 1;
 			this->sym_table->find(node.id, &node);
-			if(node.id.lev==1)//ÊÇ¾Ö²¿±äÁ¿
+			if(node.id.lev==1)//æ˜¯å±€éƒ¨å˜é‡
 				sprintf(dst_name, "%s:%s", this->func_name, src_name);
-			else  //ÊÇÈ«¾Ö±äÁ¿
+			else  //æ˜¯å…¨å±€å˜é‡
 				sprintf(dst_name, ":%s", src_name);
 		}
 	return 0;
@@ -267,8 +267,8 @@ struct tetraCode* midCode::add(struct tetraCode* code)
 	return new_code;
 }
 
-//ÎªÁËÖ§³Ö·ÇÏßĞÔÉú³ÉÖĞ¼ä´úÂë£¬Ìí¼ÓÒÔÏÂº¯Êı(ÓÃÓÚdo-forÓï¾äºÍº¯Êıµ÷ÓÃÓï¾ä)
-//½«½Úµã²åÈëµ½Ö¸¶¨µÄheadÎª¿ªÍ·µÄÁ´ÖĞ
+//ä¸ºäº†æ”¯æŒéçº¿æ€§ç”Ÿæˆä¸­é—´ä»£ç ï¼Œæ·»åŠ ä»¥ä¸‹å‡½æ•°(ç”¨äºdo-forè¯­å¥å’Œå‡½æ•°è°ƒç”¨è¯­å¥)
+//å°†èŠ‚ç‚¹æ’å…¥åˆ°æŒ‡å®šçš„headä¸ºå¼€å¤´çš„é“¾ä¸­
 struct tetraCode*  midCode::addn(struct tetraCode& head, int op, char* rd, int rs_num)
 {
 	struct tetraCode* next = &head;
@@ -298,7 +298,7 @@ struct tetraCode* midCode::addn(struct tetraCode& head, int op, char* rd, char* 
 	return new_node;
 }
 
-//½«head¿ªÍ·µÄÁ´²åÈëµ½Ö÷Á´ÖĞ
+//å°†headå¼€å¤´çš„é“¾æ’å…¥åˆ°ä¸»é“¾ä¸­
 struct tetraCode* midCode::insert(struct tetraCode head, struct tetraCode *node_pre)
 {
 	struct tetraCode* node_next = node_pre->next, *next = &head;
@@ -309,7 +309,7 @@ struct tetraCode* midCode::insert(struct tetraCode head, struct tetraCode *node_
 	node_pre->next = head.next;
 	next->next = node_next;
 	if (node_next == NULL)
-		this->code_now = next; //²åµ½Î²²¿µÄ»°£¬Òª¸Ä±äcode_nowÖ¸ÏòÎ²²¿
+		this->code_now = next; //æ’åˆ°å°¾éƒ¨çš„è¯ï¼Œè¦æ”¹å˜code_nowæŒ‡å‘å°¾éƒ¨
 	return head.next;
 
 }

@@ -1,4 +1,4 @@
-#include "syntaxAnalys.h"
+ï»¿#include "syntaxAnalys.h"
 #include <iostream>
 #include "getSym.h"
 #include "error.h"
@@ -13,7 +13,7 @@ int recgFactor(int level, struct tableNode * tmpnode) {
 	int type_tmp = curSym.getType();
 	try {
 		int isPos = true;
-		if (curSym.getType() == PLUS_SYM || curSym.getType() == MINIUS_SYM || curSym.getType() == UNSNUM_SYM) {		//ÕûÊý
+		if (curSym.getType() == PLUS_SYM || curSym.getType() == MINIUS_SYM || curSym.getType() == UNSNUM_SYM) {		//æ•´æ•°
 			tmpnode->type = INT_SYM;
 			if (curSym.getType() == PLUS_SYM || curSym.getType() == MINIUS_SYM) {
 				if (curSym.getType() == MINIUS_SYM) isPos = false;
@@ -57,7 +57,7 @@ int recgFactor(int level, struct tableNode * tmpnode) {
 				return 0;
 			}
 			if (node.kind==TB_ARRAY) {
-				//Êý×é
+				//æ•°ç»„
 				tmpnode->type = node.type;
 				getSym();
 				if(curSym.getType()!=LBRACKET_SYM) MISS_TOKEN
@@ -84,7 +84,7 @@ int recgFactor(int level, struct tableNode * tmpnode) {
 				return 0;
 			}
 			else if (node.kind == TB_CONST || node.kind == TB_VAR) {
-				//±äÁ¿»ò³£Á¿
+				//å˜é‡æˆ–å¸¸é‡
 				if (node.kind == TB_CONST) tmpnode->val = node.val;
 				else tmpnode->val = EXCEPTVALUE;
 				tmpnode->type = node.type;
@@ -94,7 +94,7 @@ int recgFactor(int level, struct tableNode * tmpnode) {
 				return 0;
 			}
 			else {
-				//ÓÐ·µ»ØÖµº¯Êýµ÷ÓÃ
+				//æœ‰è¿”å›žå€¼å‡½æ•°è°ƒç”¨
 				recgIFuncCall(level, tmpnode);
 				tmpnode->val = EXCEPTVALUE;
 				cout << "At line " << lineNum << " This is a factor!" << endl;

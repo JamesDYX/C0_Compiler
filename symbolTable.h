@@ -1,4 +1,4 @@
-#include <cstring>
+ï»¿#include <cstring>
 #include <map>
 #include "error.h"
 #ifndef SYMBOLTABLE_H
@@ -21,24 +21,24 @@
 using namespace std;
 
 
-struct tableNodeId { //·ûºÅ±íÖĞµÄ±êÊ¶·ûid£¬Í¨¹ıÃû³ÆºÍ¼¶±ğÎ¨Ò»È·¶¨Ò»·ûºÅ
+struct tableNodeId { //ç¬¦å·è¡¨ä¸­çš„æ ‡è¯†ç¬¦idï¼Œé€šè¿‡åç§°å’Œçº§åˆ«å”¯ä¸€ç¡®å®šä¸€ç¬¦å·
 	char name[STR_MAX_LEN];
-	int lev;		//ËùÔÚ¼¶±ğ
+	int lev;		//æ‰€åœ¨çº§åˆ«
 };
 
 struct tableNode {
 
 	struct tableNodeId id;
-	int kind;		//ÓĞÎŞ·µ»ØÖµº¯Êı¡¢³£Á¿¡¢±äÁ¿¡¢Êı×é±äÁ¿
+	int kind;		//æœ‰æ— è¿”å›å€¼å‡½æ•°ã€å¸¸é‡ã€å˜é‡ã€æ•°ç»„å˜é‡
 	int type;		//int char void
 	union {
-		int val;	//³£Á¿µÄÖµ
-		struct {	//ÓÃÓÚ¼ÇÂ¼ĞÎ²ÎµÄĞÎ²Î½á¹¹Ìå
-			int paramNum;	//ĞÎ²ÎÊıÁ¿
-			struct tableNode *param[PAR_MAX_LEN];	//ĞÎ²Î±í
+		int val;	//å¸¸é‡çš„å€¼
+		struct {	//ç”¨äºè®°å½•å½¢å‚çš„å½¢å‚ç»“æ„ä½“
+			int paramNum;	//å½¢å‚æ•°é‡
+			struct tableNode *param[PAR_MAX_LEN];	//å½¢å‚è¡¨
 		};
-		struct {	//ÓÃÓÚ¼ÇÂ¼Êı×éµÄÊı×é½á¹¹Ìå
-			int len;	//Êı×é³¤¶È
+		struct {	//ç”¨äºè®°å½•æ•°ç»„çš„æ•°ç»„ç»“æ„ä½“
+			int len;	//æ•°ç»„é•¿åº¦
 
 		};
 	};
@@ -68,7 +68,7 @@ public:
 	table_map table;
 	int find(struct tableNodeId id, struct tableNode *node);
 	int insert(struct tableNode node, int force = 0);
-	int delet(int lev);	//É¾³ıÄ³Ò»¼¶ËùÓĞ²ÎÊı
+	int delet(int lev);	//åˆ é™¤æŸä¸€çº§æ‰€æœ‰å‚æ•°
 
 };
 

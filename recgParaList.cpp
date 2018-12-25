@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include "syntaxAnalys.h"
 #include "getSym.h"
 #include "error.h"
@@ -24,7 +24,7 @@ int recgParaList(int level, struct tableNode * prenode) {
 		state = E_MISS_TOKEN;
 	}
 	node.id.lev = level;
-	strcpy_s(node.id.name, curSym.getValueStr());
+	strcpy(node.id.name, curSym.getValueStr());
 	node.kind = TB_VAR;
 	node.type = type;
 	if (state == 0) {
@@ -54,7 +54,7 @@ int recgParaList(int level, struct tableNode * prenode) {
 			state = E_MISS_TOKEN;
 		}
 		node.id.lev = level;
-		strcpy_s(node.id.name, curSym.getValueStr());
+		strcpy(node.id.name, curSym.getValueStr());
 		node.kind = TB_VAR;
 		node.type = type;
 		if (state == 0) {

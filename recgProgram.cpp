@@ -1,4 +1,4 @@
-#include "syntaxAnalys.h"
+﻿#include "syntaxAnalys.h"
 #include "error.h"
 #include "getSym.h"
 #include <iostream>

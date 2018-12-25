@@ -1,4 +1,4 @@
-#include "syntaxAnalys.h"
+﻿#include "syntaxAnalys.h"
 #include <iostream>
 #include "getSym.h"
 #include "error.h"
@@ -18,7 +18,7 @@ int recgMain(int level) {
 
 		struct tableNode node;
 		node.id.lev = level;
-		strcpy_s(node.id.name, curSym.getValueStr());
+		strcpy(node.id.name, curSym.getValueStr());
 		node.kind = TB_NFUNC;
 		node.type = VOID_SYM;
 		node.paramNum = 0;

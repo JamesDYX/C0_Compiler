@@ -1,4 +1,4 @@
-#include "symbol.h"
+﻿#include "symbol.h"
 #include "getSym.h"
 #include <string.h>
 #include <stdlib.h>

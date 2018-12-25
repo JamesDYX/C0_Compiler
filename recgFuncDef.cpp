@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include "syntaxAnalys.h"
 #include "getSym.h"
 #include "error.h"
@@ -20,7 +20,7 @@ int recgFuncDef(int level) {
 				throw(E_NOT_THIS);
 			}
 			node.id.lev = level;
-			strcpy_s(node.id.name, curSym.getValueStr());
+			strcpy(node.id.name, curSym.getValueStr());
 			node.kind = type_tmp==VOID_SYM?TB_NFUNC:TB_IFUNC;
 			node.type = type_tmp;
 			node.paramNum = 0;

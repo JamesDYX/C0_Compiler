@@ -1,6 +1,7 @@
-#include "error.h"
+﻿#include "error.h"
 #include "getSym.h"
 #include <stdlib.h>
+#include <iostream>
 using namespace std;
 
 void reportError(int ERROR_NUM) {
@@ -41,8 +42,7 @@ void reportError(int ERROR_NUM) {
 	else
 		printf("Unknown error at (%d)\n", lineNum);
 	printf("Exception Found! Press any key to continue\n");
-	system("pause");
-
+	cin.get();
 }
 
 int isUntilToken(char c, char * untilToken, int size) {
