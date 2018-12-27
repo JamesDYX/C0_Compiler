@@ -1084,12 +1084,12 @@ void objectCode ::printMips() {
 		}
 		case(add):
 		{
-			outfp << "add " << curMips->rd_reg << " " << curMips->rs_reg << " " << curMips->rt_reg << endl;
+			outfp << "addu " << curMips->rd_reg << " " << curMips->rs_reg << " " << curMips->rt_reg << endl;
 			break;
 		}
 		case(addi):
 		{
-			outfp << "addi " << curMips->rd_reg << " " << curMips->rs_reg << " " << curMips->rt_num << endl;
+			outfp << "addiu " << curMips->rd_reg << " " << curMips->rs_reg << " " << curMips->rt_num << endl;
 			break;
 		}
 		case(sub):
