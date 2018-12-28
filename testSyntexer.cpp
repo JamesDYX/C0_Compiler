@@ -3,7 +3,7 @@
 #include "syntaxAnalys.h"
 #include "midCode.h"
 #include "objectCode.h"
-#include "fundBlock.h"
+#include "optimize.h"
 #include "error.h"
 using namespace std;
 int main() {
@@ -18,7 +18,8 @@ int main() {
 	}
 	recgProgram(0);
 	//开始优化
-	shared_ptr<fundBlock> firstBlock = dividFundBlock();//分割基本块
+	removeLabel();
+	shared_ptr<fundBlock> firstBlock = dividFundBlock();//划分基本块
 
 	ofstream tetraCodeFile;
 	tetraCodeFile.open("midCode.txt");
