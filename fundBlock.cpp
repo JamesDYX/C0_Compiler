@@ -16,7 +16,7 @@ void fundBlock::setLastTetra(struct tetraCode *code) {
     this->lastTetra = code;
 }
 
-int dividFundBlock(){
+fundBlock dividFundBlock(){
     tetraCode * curCode = &MidCode.code_head;
     //设置第一个基本块
     fundBlock beginBlock(curCode);
@@ -93,4 +93,5 @@ int dividFundBlock(){
         if(curBlock.isLast) break;
         curBlock = curBlock.succBlock[0];
     }
+    return beginBlock;
 }

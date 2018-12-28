@@ -26,6 +26,6 @@ public:
     void setLastTetra(struct tetraCode * code);
 };
 
-int dividFundBlock();
+fundBlock dividFundBlock();
 
 #endif //COMPILER_FUNDBLOCK_H
