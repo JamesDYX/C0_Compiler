@@ -6,13 +6,14 @@
 #define COMPILER_FUNDBLOCK_H
 
 #include <vector>
+#include <memory>
 #include "midCode.h"
 using namespace std;
 
 class fundBlock {
 public:
-    vector<fundBlock> prevBlock;//前驱基本块
-    vector<fundBlock> succBlock;//后继基本块
+    vector<shared_ptr<fundBlock>> prevBlock;//前驱基本块
+    vector<shared_ptr<fundBlock>> succBlock;//后继基本块
     struct tetraCode* firstTetra;//该基本块初始的四元式
     struct tetraCode* lastTetra;//该基本块末尾的四元式
     bool isLast = false;
@@ -21,11 +22,11 @@ public:
         this->firstTetra = firstTetra;
     }
 
-    void addPrev(fundBlock prev);
-    void addSucc(fundBlock succ);
+    void addPrev(shared_ptr<fundBlock> prev);
+    void addSucc(shared_ptr<fundBlock> succ);
     void setLastTetra(struct tetraCode * code);
 };
 
-fundBlock dividFundBlock();
+shared_ptr<fundBlock> dividFundBlock();
 
 #endif //COMPILER_FUNDBLOCK_H

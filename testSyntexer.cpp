@@ -3,6 +3,7 @@
 #include "syntaxAnalys.h"
 #include "midCode.h"
 #include "objectCode.h"
+#include "fundBlock.h"
 #include "error.h"
 using namespace std;
 int main() {
@@ -16,6 +17,9 @@ int main() {
 		printf("Reach the end of the file at (%d)\n", lineNum);
 	}
 	recgProgram(0);
+	//开始优化
+	shared_ptr<fundBlock> firstBlock = dividFundBlock();//分割基本块
+
 	ofstream tetraCodeFile;
 	tetraCodeFile.open("midCode.txt");
 	MidCode.outPut(tetraCodeFile);

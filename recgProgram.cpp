@@ -15,6 +15,7 @@ int recgProgram(int level) {
 	MidCode.add(JUMP, toMain);
 	while (recgFuncDef(level) != -E_NOT_THIS);
 	if (recgMain(level) == -E_NOT_THIS) {
+		reportError(E_MAIN);
 		return -E_NOT_THIS;
 	}
 	else {

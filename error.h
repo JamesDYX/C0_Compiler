@@ -23,6 +23,7 @@
 #define E_NO_RET 21 //缺少return语句
 
 #define E_OUT_BOUND	22//数组越界检查
+#define E_MAIN 23   //主函数声明不正确
 
 void reportError(int ERROR_NUM);
 void skip(char * untilToken, int size);

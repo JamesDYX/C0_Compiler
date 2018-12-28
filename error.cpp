@@ -39,6 +39,8 @@ void reportError(int ERROR_NUM) {
 		printf("No return until last of a function at (%d)\n", lineNum);
 	else if(ERROR_NUM== E_OUT_BOUND)
 		printf("Index out of bound at (%d)\n", lineNum);
+	else if(ERROR_NUM==E_MAIN)
+		printf("Wrong main at (%d)\n", lineNum);
 	else
 		printf("Unknown error at (%d)\n", lineNum);
 	printf("Exception Found! Press any key to continue\n");
