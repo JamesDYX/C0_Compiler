@@ -15,6 +15,7 @@ public:
     vector<fundBlock> succBlock;//后继基本块
     struct tetraCode* firstTetra;//该基本块初始的四元式
     struct tetraCode* lastTetra;//该基本块末尾的四元式
+    bool isLast = false;
 
     fundBlock(struct tetraCode * firstTetra){
         this->firstTetra = firstTetra;
