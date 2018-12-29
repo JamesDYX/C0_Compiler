@@ -7,5 +7,6 @@
 
 #include "fundBlock.h"
 void removeLabel();
+void constFold();
 
 #endif //COMPILER_OPTIMIZE_H
