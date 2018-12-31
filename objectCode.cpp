@@ -87,6 +87,7 @@ objectCode::objectCode()
 void objectCode::addNode(tetraCode midCode) {
 	switch (midCode.op)
 	{
+	case(LI):
 	case(CONST_I):
 	case(CONST_C):
 	{

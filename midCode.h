@@ -54,6 +54,8 @@
 #define JUMP 36
 #define NOP 37
 
+#define LI 38
+
 struct tetraCode
 {
 	int op;

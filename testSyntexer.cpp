@@ -19,6 +19,7 @@ int main() {
 	recgProgram(0);
 	//开始优化
 	removeLabel();
+	constFold();
 	shared_ptr<fundBlock> firstBlock = dividFundBlock();//划分基本块
 
 	ofstream tetraCodeFile;

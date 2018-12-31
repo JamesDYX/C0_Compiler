@@ -19,10 +19,18 @@ int recgExpression(int level, struct tableNode * tmpnode) {
 			if(curSym.getType() == MINIUS_SYM) isPos = false;
 			getSym();
 		}
-		if (recgTerm(level, tmpnode) == -E_NOT_THIS) throw(E_NOT_THIS);
+        struct tableNode * tmpnode1 = (struct tableNode *)malloc(sizeof(struct tableNode));
+        strcpy(tmpnode1->id.name , TMP_VAR);
+		if (recgTerm(level, tmpnode1) == -E_NOT_THIS) throw(E_NOT_THIS);
+		tmpnode->kind = tmpnode1->kind;
+		tmpnode->type = tmpnode1->type;
 		if (!isPos) {
 			tmpnode->val = EXCEPTVALUE;
 			MidCode.add(SUB, tmpnode->id.name, ZERO, tmpnode->id.name);
+		}
+		else{
+		    tmpnode->val = tmpnode1->val;
+            MidCode.add(ADD, tmpnode->id.name, tmpnode1->id.name, ZERO);
 		}
 
 		streampos sp = sourceFile.tellg();

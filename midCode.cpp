@@ -169,6 +169,10 @@ void midCode::outPut(tetraCode code, ofstream & tetraCodeFile) {
 		tetraCodeFile << "ret"<< endl;
 		break;
 	}
+	case(LI):
+	{
+		tetraCodeFile << "li " << code.rd << " = " << code.rs_num << endl;
+	}
 	default:
 	{
 		break;
