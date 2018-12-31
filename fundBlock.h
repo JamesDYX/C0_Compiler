@@ -16,7 +16,7 @@ public:
     vector<shared_ptr<fundBlock>> succBlock;//后继基本块
     struct tetraCode* firstTetra;//该基本块初始的四元式
     struct tetraCode* lastTetra;//该基本块末尾的四元式
-    bool isLast = false;
+    bool isValid = false;
 
     fundBlock(struct tetraCode * firstTetra){
         this->firstTetra = firstTetra;
@@ -28,5 +28,6 @@ public:
 };
 
 shared_ptr<fundBlock> dividFundBlock();
+void pruneBlock(shared_ptr<fundBlock> root);
 
 #endif //COMPILER_FUNDBLOCK_H

@@ -21,6 +21,7 @@ int main() {
 	removeLabel();
 	constFold();
 	shared_ptr<fundBlock> firstBlock = dividFundBlock();//划分基本块
+	pruneBlock(firstBlock);
 
 	ofstream tetraCodeFile;
 	tetraCodeFile.open("midCode.txt");
