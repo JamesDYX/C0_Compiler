@@ -26,7 +26,7 @@ int recgExpression(int level, struct tableNode * tmpnode) {
 		tmpnode->type = tmpnode1->type;
 		if (!isPos) {
 			tmpnode->val = EXCEPTVALUE;
-			MidCode.add(SUB, tmpnode->id.name, ZERO, tmpnode->id.name);
+			MidCode.add(SUB, tmpnode->id.name, ZERO, tmpnode1->id.name);
 		}
 		else{
 		    tmpnode->val = tmpnode1->val;

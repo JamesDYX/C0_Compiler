@@ -2,6 +2,7 @@
 #include <iostream>
 #include "syntaxAnalys.h"
 #include "midCode.h"
+#include "fundBlock.h"
 #include "objectCode.h"
 #include "optimize.h"
 #include "error.h"
@@ -22,6 +23,7 @@ int main() {
 	constFold();
 	shared_ptr<fundBlock> firstBlock = dividFundBlock();//划分基本块
 	pruneBlock(firstBlock);
+	DAG();
 
 	ofstream tetraCodeFile;
 	tetraCodeFile.open("midCode.txt");

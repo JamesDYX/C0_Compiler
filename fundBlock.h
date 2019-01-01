@@ -26,7 +26,7 @@ public:
     void addSucc(shared_ptr<fundBlock> succ);
     void setLastTetra(struct tetraCode * code);
 };
-
+extern vector<shared_ptr<fundBlock>> allBlock;
 shared_ptr<fundBlock> dividFundBlock();
 void pruneBlock(shared_ptr<fundBlock> root);
 

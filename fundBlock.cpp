@@ -1,7 +1,8 @@
 //
 // Created by 段逸骁 on 2018-12-27.
 //
-
+#ifndef COMPILER_FUNDBLOCK_CPP
+#define COMPILER_FUNDBLOCK_CPP
 #include "fundBlock.h"
 #include <vector>
 #include <map>
@@ -30,9 +31,9 @@ public:
         this->inBlock = nullptr;
     }
 };
-map<string, func *> funcs;
 vector<shared_ptr<fundBlock>> allBlock;
 shared_ptr<fundBlock> dividFundBlock(){
+    map<string, shared_ptr<func>> funcs;
     tetraCode * curCode = &MidCode.code_head;
     //设置第一个基本块
     shared_ptr<fundBlock> beginBlock(new fundBlock(curCode));
@@ -55,14 +56,19 @@ shared_ptr<fundBlock> dividFundBlock(){
             allBlock.push_back(newBlock);
         }
         else if(curCode->op==FUNC_DEF && curBlock->lastTetra->op!=FUNC_DEF){
+
+            if(curf!="" && funcs[curf]->outBlock.empty()){
+                funcs[curf]->outBlock.push_back(allBlock[allBlock.size()-2]);
+            }
+
             shared_ptr<fundBlock> newBlock(new fundBlock(curCode));
             curBlock = newBlock;
             curBlock->setLastTetra(curCode);
             allBlock.push_back(newBlock);
-            func f(curCode->rd);
-            f.inBlock = curBlock;
+            shared_ptr<func> ff(new func(curCode->rd));
+            ff->inBlock = curBlock;
             curf = curCode->rd;
-            funcs[curCode->rd] = &f;
+            funcs[curCode->rd] = ff;
         }
         else if(curCode->op==BEQ  ||
                 curCode->op==BNE  ||
@@ -79,10 +85,13 @@ shared_ptr<fundBlock> dividFundBlock(){
                 curBlock->setLastTetra(curCode);
                 allBlock.push_back(newBlock);
                 if(curCode->op==FUNC_DEF){
-                    func f(curCode->rd);
-                    f.inBlock = curBlock;
+                    if(curf!="" && funcs[curf]->outBlock.empty()){
+                        funcs[curf]->outBlock.push_back(allBlock[allBlock.size()-2]);
+                    }
+                    shared_ptr<func> ff(new func(curCode->rd));
+                    ff->inBlock = curBlock;
                     curf = curCode->rd;
-                    funcs[curCode->rd] = &f;
+                    funcs[curCode->rd] = ff;
                 }
             }
             continue;
@@ -96,16 +105,20 @@ shared_ptr<fundBlock> dividFundBlock(){
                 curBlock->setLastTetra(curCode);
                 allBlock.push_back(newBlock);
                 if(curCode->op==FUNC_DEF){
-                    func f(curCode->rd);
-                    f.inBlock = curBlock;
+                    if(curf!="" && funcs[curf]->outBlock.empty()){
+                        funcs[curf]->outBlock.push_back(allBlock[allBlock.size()-2]);
+                    }
+                    shared_ptr<func> ff(new func(curCode->rd));
+                    ff->inBlock = curBlock;
                     curf = curCode->rd;
-                    funcs[curCode->rd] = &f;
+                    funcs[curCode->rd] = ff;
                 }
             }
             continue;
         }
         else if(curCode->op==CALL){
             string name = curCode->rd;
+            shared_ptr<func> mmm = funcs[name];
             curBlock->setLastTetra(curCode);
             curBlock->addSucc(funcs[name]->inBlock);
             funcs[name]->inBlock->addPrev(curBlock);
@@ -120,10 +133,13 @@ shared_ptr<fundBlock> dividFundBlock(){
                     curBlock->addPrev(funcs[name]->outBlock[j]);
                 }
                 if(curCode->op==FUNC_DEF){
-                    func f(curCode->rd);
-                    f.inBlock = curBlock;
+                    if(curf!="" && funcs[curf]->outBlock.empty()){
+                        funcs[curf]->outBlock.push_back(allBlock[allBlock.size()-2]);
+                    }
+                    shared_ptr<func> ff(new func(curCode->rd));
+                    ff->inBlock = curBlock;
                     curf = curCode->rd;
-                    funcs[curCode->rd] = &f;
+                    funcs[curCode->rd] = ff;
                 }
             }
             continue;
@@ -138,10 +154,13 @@ shared_ptr<fundBlock> dividFundBlock(){
                 curBlock->setLastTetra(curCode);
                 allBlock.push_back(newBlock);
                 if(curCode->op==FUNC_DEF){
-                    func f(curCode->rd);
-                    f.inBlock = curBlock;
+                    if(curf!="" && funcs[curf]->outBlock.empty()){
+                        funcs[curf]->outBlock.push_back(allBlock[allBlock.size()-2]);
+                    }
+                    shared_ptr<func> ff(new func(curCode->rd));
+                    ff->inBlock = curBlock;
                     curf = curCode->rd;
-                    funcs[curCode->rd] = &f;
+                    funcs[curCode->rd] = ff;
                 }
             }
             continue;
@@ -189,3 +208,5 @@ void pruneBlock(shared_ptr<fundBlock> root){
         pruneBlock(ptr);
     }
 }
+
+#endif

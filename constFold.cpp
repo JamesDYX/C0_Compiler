@@ -39,11 +39,28 @@ void arithmetic(int operKind, struct tetraCode * curCode){
 
     if(operKind==ADD){
         if(strcmp(curCode->rs, curCode->rd)!=0){
-            if(strcmp(curCode->rs, ":&zero")==0 && curCode->op==SUB && strcmp(curCode->rt, curCode->rd)==0){
-                tmp->defin.value = -(tmp->defin.value);
-                for(int i=0; i<tmp->indefin->opers.size(); i++){
-                    tmp->indefin->opers[i] = tmp->indefin->opers[i]==ADD?SUB:ADD;
+            if(strcmp(curCode->rs, ":&zero")==0 && curCode->op==SUB){
+                if(strcmp(curCode->rt, curCode->rd)==0) {
+                    tmp->defin.value = -(tmp->defin.value);
+                    for (int i = 0; i < tmp->indefin->opers.size(); i++) {
+                        tmp->indefin->opers[i] = tmp->indefin->opers[i] == ADD ? SUB : ADD;
+                    }
                 }
+                else{
+                    if(tmpTabel[curCode->rt]->indefin->names.empty()){
+                        tmp->defin.state = known;
+                        tmp->defin.value = -(tmpTabel[curCode->rt]->defin.value);
+                    }
+                    else{
+                        tmp->defin.state = known;
+                        tmp->defin.value = 0;
+                        tmp->indefin->names.clear();
+                        tmp->indefin->opers.clear();
+                        tmp->indefin->names.emplace_back(curCode->rt);
+                        tmp->indefin->opers.push_back(SUB);
+                    }
+                }
+                return;
             }
             else if(isTemp(curCode->rs)&&tmpTabel.count(curCode->rs)!=0&& tmpTabel[curCode->rs]->indefin->names.empty()){
                 if(tmp->defin.state==unknown){
@@ -362,6 +379,13 @@ void constFold(){
         else if(curCode->op==SUB){
             if(isTemp(curCode->rd)){
                 //四则运算模式
+                if(tmpTabel.count(curCode->rd)==0){
+                    auto * tmp = new struct tmpValue();
+                    tmp->state = unknown;
+                    tmp->defin.state = known;
+                    tmp->defin.value = 0;
+                    tmpTabel[curCode->rd] = tmp;
+                }
                 arithmetic(ADD, curCode);
             }
             else{

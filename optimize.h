@@ -8,5 +8,6 @@
 #include "fundBlock.h"
 void removeLabel();
 void constFold();
+void DAG();
 
 #endif //COMPILER_OPTIMIZE_H
