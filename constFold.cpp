@@ -197,7 +197,7 @@ void decode(char * tmpName, tetraCode * * curNew, char * replaceName = (char *) 
                 *curNew = tmpCode;
 
                 tmpCode = (struct tetraCode *)malloc(sizeof(struct tetraCode));
-                tmpCode->op = (tmp->state==ADD)?(tmp->indefin->opers[0]==ADD)?ADD:SUB:MULT;
+                tmpCode->op = (tmp->state==ADD)?(tmp->indefin->opers[0]==ADD)?ADD:SUB:(tmp->indefin->opers[0]==DIV)?DIV:MULT;
                 strcpy(tmpCode->rd, tmpName);
                 strcpy(tmpCode->rs, tmpVar);
                 strcpy(tmpCode->rt, tmpName);
@@ -215,7 +215,7 @@ void decode(char * tmpName, tetraCode * * curNew, char * replaceName = (char *) 
                 *curNew = tmpCode;
 
                 tmpCode = (struct tetraCode *)malloc(sizeof(struct tetraCode));
-                tmpCode->op = (tmp->state==ADD)?(tmp->indefin->opers[0]==ADD)?ADD:SUB:MULT;
+                tmpCode->op = (tmp->state==ADD)?(tmp->indefin->opers[0]==ADD)?ADD:SUB:(tmp->indefin->opers[0]==DIV)?DIV:MULT;
                 strcpy(tmpCode->rd, replaceName);
                 strcpy(tmpCode->rs, replaceName);
                 strcpy(tmpCode->rt, tmpName);
@@ -255,7 +255,7 @@ void decode(char * tmpName, tetraCode * * curNew, char * replaceName = (char *) 
                 strcpy(num2, (tmp->indefin->names[1]).c_str());
                 decode(num2, curNew);
                 auto * tmpCode = (struct tetraCode *)malloc(sizeof(struct tetraCode));
-                tmpCode->op = (tmp->state==ADD)?(tmp->indefin->opers[1]==ADD)?ADD:SUB:MULT;
+                tmpCode->op = (tmp->state==ADD)?(tmp->indefin->opers[1]==ADD)?ADD:SUB:(tmp->indefin->opers[1]==DIV)?DIV:MULT;
                 strcpy(tmpCode->rd, replaceName== nullptr?tmpName:replaceName);
                 strcpy(tmpCode->rs, tmpName);
                 strcpy(tmpCode->rt, num2);
@@ -280,7 +280,7 @@ void decode(char * tmpName, tetraCode * * curNew, char * replaceName = (char *) 
                 strcpy(num2, (tmp->indefin->names[1]).c_str());
                 decode(num2, curNew);
                 auto * tmpCode = (struct tetraCode *)malloc(sizeof(struct tetraCode));
-                tmpCode->op = (tmp->state==ADD)?(tmp->indefin->opers[1]==ADD)?ADD:SUB:MULT;
+                tmpCode->op = (tmp->state==ADD)?(tmp->indefin->opers[1]==ADD)?ADD:SUB:(tmp->indefin->opers[1]==DIV)?DIV:MULT;
                 strcpy(tmpCode->rd, replaceName== nullptr?tmpName:replaceName);
                 strcpy(tmpCode->rs, num1);
                 strcpy(tmpCode->rt, num2);
@@ -295,7 +295,7 @@ void decode(char * tmpName, tetraCode * * curNew, char * replaceName = (char *) 
         strcpy(num, (tmp->indefin->names[i]).c_str());
         decode(num, curNew);
         auto * tmpCode = (struct tetraCode *)malloc(sizeof(struct tetraCode));
-        tmpCode->op = (tmp->state==ADD)?(tmp->indefin->opers[i]==ADD)?ADD:SUB:MULT;
+        tmpCode->op = (tmp->state==ADD)?(tmp->indefin->opers[i]==ADD)?ADD:SUB:(tmp->indefin->opers[i]==DIV)?DIV:MULT;
         strcpy(tmpCode->rd, replaceName== nullptr?tmpName:replaceName);
         strcpy(tmpCode->rs, replaceName== nullptr?tmpName:replaceName);
         strcpy(tmpCode->rt, num);
