@@ -1,4 +1,4 @@
-//
+﻿//
 // Created by 段逸骁 on 2018-12-29.
 // 常量合并
 //
@@ -291,7 +291,7 @@ void decode(char * tmpName, tetraCode * * curNew, char * replaceName = (char *) 
         }
     }
     while(i<size){
-        char num[10];
+        char num[100];
         strcpy(num, (tmp->indefin->names[i]).c_str());
         decode(num, curNew);
         auto * tmpCode = (struct tetraCode *)malloc(sizeof(struct tetraCode));

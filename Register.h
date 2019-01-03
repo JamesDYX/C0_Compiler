@@ -1,4 +1,4 @@
-//
+﻿//
 // Created by 段逸骁 on 2019-01-01.
 //
 
@@ -10,6 +10,7 @@
 #include <fstream>
 #include <map>
 #include <vector>
+#include <memory>
 using namespace std;
 class Register{
 public:
