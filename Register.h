@@ -15,39 +15,46 @@ class Register{
 public:
     string regName;
     bool hasAlloc;
+    bool isDirty;
     string varName;
 
     Register (string Name){
         this->regName = Name;
         this->hasAlloc = false;
+        this->isDirty = false;
     }
-    void apply(string var, int * curRelativeAddress, struct tetraCode * curCode, ofstream &mips);
-    void release(int * curRelativeAddress, struct tetraCode * curCode, ofstream &mips);
+    void apply(string var, int * curRelativeAddress, struct tetraCode * curCode, vector<string> &mips);
+    void release(int * curRelativeAddress, struct tetraCode * curCode, vector<string> &mips);
 };
 class RegisterAlloc{
-private:
+public:
     int tempCount;
     int tempNum;
-public:
     vector<shared_ptr<Register>> paraReg;
     vector<shared_ptr<Register>> globReg;
     vector<shared_ptr<Register>> tempReg;
-    RegisterAlloc(int tmpNum){
-        this->tempNum = tempNum;
+    RegisterAlloc(int Num){
+        this->tempNum = Num;
         this->tempCount = 0;
         for(int i=0; i<4; i++){
-            paraReg.push_back(make_shared<Register>(Register("$a"+i)));
+            paraReg.push_back(make_shared<Register>(Register("$a"+to_string(i))));
         }
         for(int i=0; i<8; i++){
-            globReg.push_back(make_shared<Register>(Register("$s"+i)));
+            globReg.push_back(make_shared<Register>(Register("$s"+to_string(i))));
         }
-        for(int i=0; i<tmpNum; i++){
-            tempReg.push_back(make_shared<Register>(Register("$t"+i)));
+        for(int i=0; i<tempNum; i++){
+            tempReg.push_back(make_shared<Register>(Register("$t"+to_string(i))));
         }
+        referCount();
     }
-    string alloc(string var, int * curRelativeAddress, struct tetraCode * current, ofstream &mips);
+    string findVar(string var);
+    string alloc(string var, int * curRelativeAddress, struct tetraCode * current, vector<string> &mips);
     void referCount();
+    void dirt(string name);
+    void clearTemp(int * curRelativeAddress, struct tetraCode * curCode, vector<string> &mips); //将临时寄存器中的值存入内存
+    void clearTemp(vector<string> &mips);
 
 };
 extern map<string, int > NAMap;
+extern map<string, string> NRMap;  //寄存器分配记录
 #endif //COMPILER_REGISTER_H

@@ -390,9 +390,9 @@ void constFold(){
             }
             else{
                 //赋值模式
-                if(isTemp(curCode->rs))
+                if(isTemp(curCode->rs)&&strcmp(curCode->rs, ":&zero")!=0)
                     decode(curCode->rs, &curNew);
-                if(isTemp(curCode->rt))
+                if(isTemp(curCode->rt)&&strcmp(curCode->rt, ":&zero")!=0)
                     decode(curCode->rt, &curNew);
                 curNew->next = curCode;
                 curNew = curCode;
@@ -447,8 +447,8 @@ void constFold(){
             curNew = curCode;
         }
         else if(curCode->op==BEQ || curCode->op==BNE || curCode->op==BGE || curCode->op==BGT){
-            decode(curCode->rs, &curNew);
-            decode(curCode->rt, &curNew);
+            if(strcmp(":&zero", curCode->rs)!=0)decode(curCode->rs, &curNew);
+            if(strcmp(":&zero", curCode->rt)!=0)decode(curCode->rt, &curNew);
             curNew->next = curCode;
             curNew = curCode;
         }

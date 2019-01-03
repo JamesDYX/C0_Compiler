@@ -12,7 +12,13 @@ int recgTerm(int level, struct tableNode * tmpnode) {
 	int n_tmp = curSym.len;
 	int type_tmp = curSym.getType();
 	try {
-		if (recgFactor(level, tmpnode) == -E_NOT_THIS) throw(E_NOT_THIS);
+		struct tableNode * tmpnode1 = (struct tableNode *)malloc(sizeof(struct tableNode));
+		strcpy(tmpnode1->id.name , TMP_VAR);
+		if (recgFactor(level, tmpnode1) == -E_NOT_THIS) throw(E_NOT_THIS);
+		MidCode.add(ADD, tmpnode->id.name, tmpnode1->id.name, ZERO);
+		tmpnode->type = tmpnode1->type;
+		tmpnode->kind = tmpnode1->kind;
+		tmpnode->val = tmpnode1->val;
 		streampos sp = sourceFile.tellg();
 		int n = curSym.len;
 		int type = curSym.getType();

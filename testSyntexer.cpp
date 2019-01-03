@@ -5,6 +5,7 @@
 #include "fundBlock.h"
 #include "objectCode.h"
 #include "optimize.h"
+#include "newObjectCode.h"
 #include "error.h"
 using namespace std;
 int main() {
@@ -19,17 +20,20 @@ int main() {
 	}
 	recgProgram(0);
 	//开始优化
-	removeLabel();
-	constFold();
-	shared_ptr<fundBlock> firstBlock = dividFundBlock();//划分基本块
-	pruneBlock(firstBlock);
-	DAG();
+        removeLabel();
+        constFold();
+        shared_ptr<fundBlock> firstBlock = dividFundBlock();//划分基本块
+        pruneBlock(firstBlock);
+        DAG();
 
 	ofstream tetraCodeFile;
 	tetraCodeFile.open("midCode.txt");
 	MidCode.outPut(tetraCodeFile);
 	objectCode MIPS;
 	MIPS.printMips();
+
+	newObjectCode newMIPS;
+	newMIPS.printMips();
 
 	cout << "Press any key to continue..." << endl;
 	cin.get();
