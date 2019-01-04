@@ -194,8 +194,7 @@ void countUse(string name, struct tetraCode * curCode){
         counter[name]+=count;
 }
 int cmp(const pair<string, int> & pair1, const pair<string, int> & pair2){
-
-	if(pair1.second>pair2.second) return true;
+    if(pair1.second>pair2.second) return true;
     else if(pair1.second==pair2.second){
         return pair1.first>pair2.first;
     }
