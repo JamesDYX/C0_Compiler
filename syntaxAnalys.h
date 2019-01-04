@@ -1,11 +1,11 @@
 ﻿#include "error.h"
 #include "symbolTable.h"
 #include <fstream>
-#define MISS_TOKEN  {									\
-					reportError(E_MISS_TOKEN);			\
-					char until[3] = { ';','\n','}' };		\
-					skip(until, 3);						\
-					curState = E_MISS_TOKEN;			\
+#define MISS_TOKEN  {												\
+					reportError(E_MISS_TOKEN);						\
+					char until[6] = { ';','\n','{','}','(',')'};	\
+					skip(until, 6);									\
+					curState = E_MISS_TOKEN;						\
 					}
 
 #ifndef SYNTAXANALYS_H

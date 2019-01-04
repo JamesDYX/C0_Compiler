@@ -28,11 +28,7 @@ int recgFuncDef(int level) {
 			if (curSym.getType() == LPAREN_SYM) {
 				getSym();
 				recgParaList(level+1, &node);
-				if (curSym.getType() != RPAREN_SYM) {
-					reportError(E_MISS_TOKEN);
-					char until[2] = { ';','\n' };
-					skip(until, 2);
-				}
+				if (curSym.getType() != RPAREN_SYM) MISS_TOKEN
 				if (Table.insert(node) != 0) {
 					reportError(E_REDEF);
 					return 0;
@@ -44,18 +40,10 @@ int recgFuncDef(int level) {
 					else  MidCode.add(PARA_C, node.param[i]->id.name);
 				}
 				getSym();
-				if (curSym.getType() != LCURLY_SYM) {
-					reportError(E_MISS_TOKEN);
-					char until[2] = { ';','\n' };
-					skip(until, 2);
-				}
+				if (curSym.getType() != LCURLY_SYM) MISS_TOKEN
 				getSym();
 				recgCompound(level + 1);
-				if (curSym.getType() != RCURLY_SYM) {
-					reportError(E_MISS_TOKEN);
-					char until[2] = { ';','\n' };
-					skip(until, 2);
-				}
+				if (curSym.getType() != RCURLY_SYM) MISS_TOKEN
 				if (!hasRetrun) {
 					if (type_tmp == VOID_SYM) MidCode.add(RET_V);
 					else {
@@ -79,11 +67,7 @@ int recgFuncDef(int level) {
 				strcpy(MidCode.func_name, node.id.name);
 				getSym();
 				recgCompound(level + 1);
-				if (curSym.getType() != RCURLY_SYM) {
-					reportError(E_MISS_TOKEN);
-					char until[2] = { ';','\n' };
-					skip(until, 2);
-				}
+				if (curSym.getType() != RCURLY_SYM) MISS_TOKEN
 				if (!hasRetrun) {
 					if (type_tmp == VOID_SYM) MidCode.add(RET_V);
 					else {
@@ -99,11 +83,7 @@ int recgFuncDef(int level) {
 				return 0;
 			}
 			else {
-				if (type_tmp == VOID_SYM) {
-					reportError(E_MISS_TOKEN);
-					char until[2] = { ';','\n' };
-					skip(until, 2);
-				}
+				if (type_tmp == VOID_SYM) MISS_TOKEN
 				else throw(E_NOT_THIS);
 			}
 		}
