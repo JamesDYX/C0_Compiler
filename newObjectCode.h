@@ -1,4 +1,4 @@
-//
+﻿//
 // Created by 段逸骁 on 2019-01-02.
 //
 
@@ -33,6 +33,7 @@ public:
     }
     void genObjectCode();
     void addCode(struct tetraCode * midCode);
+	void sightOpt();
     void printMips();
 };
 

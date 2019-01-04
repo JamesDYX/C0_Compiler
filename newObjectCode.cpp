@@ -4,6 +4,8 @@
 
 #include "newObjectCode.h"
 #include "fundBlock.h"
+#include <iterator>
+#include <regex>
 #define STR (string("string")+to_string(STR_COUNT++))
 int STR_COUNT = 0;
 
@@ -287,11 +289,49 @@ void newObjectCode ::addCode(struct tetraCode * midCode) {
         }
     }
 }
+std::vector<std::string> s_split(const std::string& in, const std::string& delim) {
+	std::regex re{ delim };
+	// 调用 std::vector::vector (InputIterator first, InputIterator last,const allocator_type& alloc = allocator_type())
+	// 构造函数,完成字符串分割
+	return std::vector<std::string> {
+		std::sregex_token_iterator(in.begin(), in.end(), re, -1),
+			std::sregex_token_iterator()
+	};
+}
+void newObjectCode::sightOpt() {
+	for (int i = 1; i < mips.size(); i++) {
+		vector<string> curMips = s_split(mips[i], string(" "));
+		if (curMips[0] == string("addu")) {
+			vector<string> lastMips = s_split(mips[i-1], string(" "));
+			if (lastMips[0] == string("li") && lastMips[1] == curMips[1]) {
+				if (curMips[1] == curMips[2] && curMips[1] != curMips[3]) {
+					mips[i] = string("addiu ") + curMips[1] + string(" ") + curMips[3] + string(" ") + lastMips[2];
+					mips.erase(mips.begin()+i-1);
+				}
+				else if (curMips[1] == curMips[3] && curMips[1] != curMips[2]) {
+					mips[i] = string("addiu ") + curMips[1] + string(" ") + curMips[2] + string(" ") + lastMips[2];
+					mips.erase(mips.begin() + i - 1);
+				}
+			}
+		}
+		else if (curMips[0] == string("subu")) {
+			vector<string> lastMips = s_split(mips[i - 1], string(" "));
+			if (lastMips[0] == string("li") && lastMips[1] == curMips[1]) {
+				if (curMips[1] == curMips[3] && curMips[1] != curMips[2]) {
+					mips[i] = string("subiu ") + curMips[1] + string(" ") + curMips[2] + string(" ") + lastMips[2];
+					mips.erase(mips.begin() + i - 1);
+				}
+			}
+		}
+	}
+}
 void newObjectCode ::printMips() {
     ofstream outfp;
+	sightOpt();
     outfp.open("MipsCode.txt");
     for(string s:mips) outfp<<s<<endl;
     outfp << "addi $fp $fp " << end_golbal_address << endl;
     Registers.clearTemp(mips);
     outfp << "jal main" << endl;
+	system("java -jar Mars.jar dump .text HexText hexCode.txt a mc Default mipsCode.txt");
 }
