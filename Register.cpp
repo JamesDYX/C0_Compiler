@@ -12,12 +12,12 @@ map<string, string> NRMap;
 bool isVar(string str){
     return str.find('&')==string::npos;
 }
-void Register::apply(string var, int * curRelativeAddress, struct tetraCode * current, vector<string> &mips){     //对特定寄存器的申请
+void Register::apply(string var, int * curRelativeAddress, struct tetraCode * current, vector<string> &mips, bool write) {     //对特定寄存器的申请
     if(this->hasAlloc) this->release(curRelativeAddress, current, mips);
     this->hasAlloc = true;
     this->isDirty = false;
     this->varName = var;
-    if(NAMap.find(this->varName)!=NAMap.end()){
+    if(write && NAMap.find(this->varName)!=NAMap.end()){
         int shiftRd = NAMap.find(this->varName)->second;
         mips.push_back(string("lw " + this->regName + " " + to_string(shiftRd) + "(" + ((this->varName[0] == ':') ? "$gp" : "$fp") + ")")) ;
     }
@@ -232,7 +232,7 @@ void RegisterAlloc :: referCount(){
         this->globReg[i]->hasAlloc = true;
     }
 }
-string RegisterAlloc ::alloc(string var, int *curRelativeAddress, struct tetraCode *current, vector<string> &mips) {
+string RegisterAlloc ::alloc(string var, int *curRelativeAddress, struct tetraCode *current, vector<string> &mips, bool write) {
     string reg = findVar(var);
     if(reg!="") return reg;
 
@@ -242,7 +242,7 @@ string RegisterAlloc ::alloc(string var, int *curRelativeAddress, struct tetraCo
         if(tryToUse == this->tempCount) break;
     }
     tempCount = tryToUse;
-    this->tempReg[this->tempCount]->apply(var, curRelativeAddress, current, mips);
+    this->tempReg[this->tempCount]->apply(var, curRelativeAddress, current, mips, write);
     this->tempCount = (this->tempCount+1)%this->tempNum;
     return this->tempReg[tryToUse]->regName;
     //检查寄存器分配记录，观察其是否被分配过

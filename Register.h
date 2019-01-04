@@ -24,7 +24,7 @@ public:
         this->hasAlloc = false;
         this->isDirty = false;
     }
-    void apply(string var, int * curRelativeAddress, struct tetraCode * curCode, vector<string> &mips);
+	void apply(string var, int * curRelativeAddress, struct tetraCode * curCode, vector<string> &mips, bool write = true);
     void release(int * curRelativeAddress, struct tetraCode * curCode, vector<string> &mips);
 };
 class RegisterAlloc{
@@ -49,7 +49,7 @@ public:
         referCount();
     }
     string findVar(string var);
-    string alloc(string var, int * curRelativeAddress, struct tetraCode * current, vector<string> &mips);
+    string alloc(string var, int * curRelativeAddress, struct tetraCode * current, vector<string> &mips, bool write = true);	//分配且将内存中的值写入
     void referCount();
     void dirt(string name);
     void clearTemp(int * curRelativeAddress, struct tetraCode * curCode, vector<string> &mips); //将临时寄存器中的值存入内存

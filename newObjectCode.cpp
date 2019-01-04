@@ -1,4 +1,4 @@
-//
+﻿//
 // Created by 段逸骁 on 2019-01-02.
 //
 
@@ -29,7 +29,7 @@ void newObjectCode ::addCode(struct tetraCode * midCode) {
         case LI:
         case CONST_C:
         case CONST_I:{
-            string rd = Registers.alloc(midCode->rd, &relative_address, midCode, mips);
+            string rd = Registers.alloc(midCode->rd, &relative_address, midCode, mips, false);
             Registers.dirt(rd);
             mips.emplace_back("li "+rd+" "+to_string(midCode->rs_num));
             break;
@@ -61,7 +61,7 @@ void newObjectCode ::addCode(struct tetraCode * midCode) {
         }
         case VAR_C:
         case VAR_I:{
-            Registers.alloc(midCode->rd, &relative_address, midCode, mips);
+            Registers.alloc(midCode->rd, &relative_address, midCode, mips, false);
             if(midCode->rd[0]==':'){
                 NAMap[midCode->rd] = this->relative_address;
                 this->relative_address += 4;
@@ -77,7 +77,7 @@ void newObjectCode ::addCode(struct tetraCode * midCode) {
         case ADD:{
             string rs = strcmp(midCode->rs,":&zero")==0?"$zero":Registers.alloc(midCode->rs, &relative_address, midCode, mips);
             string rt = strcmp(midCode->rt,":&zero")==0?"$zero":Registers.alloc(midCode->rt, &relative_address, midCode, mips);
-            string rd = Registers.alloc(midCode->rd, &relative_address, midCode, mips);
+            string rd = Registers.alloc(midCode->rd, &relative_address, midCode, mips, false);
             mips.emplace_back("addu "+rd+" "+rs+" "+rt);
             Registers.dirt(rd);
             break;
@@ -85,7 +85,7 @@ void newObjectCode ::addCode(struct tetraCode * midCode) {
         case SUB:{
             string rs = strcmp(midCode->rs,":&zero")==0?"$zero":Registers.alloc(midCode->rs, &relative_address, midCode, mips);
             string rt = strcmp(midCode->rt,":&zero")==0?"$zero":Registers.alloc(midCode->rt, &relative_address, midCode, mips);
-            string rd = Registers.alloc(midCode->rd, &relative_address, midCode, mips);
+            string rd = Registers.alloc(midCode->rd, &relative_address, midCode, mips, false);
             mips.emplace_back("sub "+rd+" "+rs+" "+rt);
             Registers.dirt(rd);
             break;
@@ -93,7 +93,7 @@ void newObjectCode ::addCode(struct tetraCode * midCode) {
         case MULT:{
             string rs = strcmp(midCode->rs,":&zero")==0?"$zero":Registers.alloc(midCode->rs, &relative_address, midCode, mips);
             string rt = strcmp(midCode->rt,":&zero")==0?"$zero":Registers.alloc(midCode->rt, &relative_address, midCode, mips);
-            string rd = Registers.alloc(midCode->rd, &relative_address, midCode, mips);
+            string rd = Registers.alloc(midCode->rd, &relative_address, midCode, mips, false);
             mips.emplace_back("mul "+rd+" "+rs+" "+rt);
             Registers.dirt(rd);
             break;
@@ -101,7 +101,7 @@ void newObjectCode ::addCode(struct tetraCode * midCode) {
         case DIV:{
             string rs = strcmp(midCode->rs,":&zero")==0?"$zero":Registers.alloc(midCode->rs, &relative_address, midCode, mips);
             string rt = strcmp(midCode->rt,":&zero")==0?"$zero":Registers.alloc(midCode->rt, &relative_address, midCode, mips);
-            string rd = Registers.alloc(midCode->rd, &relative_address, midCode, mips);
+            string rd = Registers.alloc(midCode->rd, &relative_address, midCode, mips, false);
             mips.emplace_back("div "+rs+" "+rt);
             mips.emplace_back("mflo "+rd);
             Registers.dirt(rd);
@@ -113,7 +113,7 @@ void newObjectCode ::addCode(struct tetraCode * midCode) {
             string shift = strcmp(midCode->rt,":&zero")==0?"$zero":Registers.alloc(midCode->rt, &relative_address, midCode, mips);
             mips.emplace_back("sll $v1 "+shift+" 2");
             mips.emplace_back("addu $v1 $v1 "+string((midCode->rs[0] == ':') ? "$gp" : "$fp"));
-            string rd = Registers.alloc(midCode->rd, &relative_address, midCode, mips);
+            string rd = Registers.alloc(midCode->rd, &relative_address, midCode, mips, false);
             Registers.dirt(rd);
             mips.emplace_back("lw "+rd+" "+to_string(array)+"($v1)");
             break;
@@ -145,7 +145,7 @@ void newObjectCode ::addCode(struct tetraCode * midCode) {
         }
         case GET_RET_C:
         case GET_RET_I:{
-            string rd = Registers.alloc(midCode->rd, &relative_address, midCode, mips);
+            string rd = Registers.alloc(midCode->rd, &relative_address, midCode, mips, false);
             mips.emplace_back("move "+rd+" $v0");
             Registers.dirt(rd);
             break;
@@ -206,7 +206,7 @@ void newObjectCode ::addCode(struct tetraCode * midCode) {
         case(READ_I):{
             mips.emplace_back("li $v0 5");
             mips.emplace_back("syscall");
-            string rd = Registers.alloc(midCode->rd, &relative_address, midCode, mips);
+            string rd = Registers.alloc(midCode->rd, &relative_address, midCode, mips, false);
             mips.emplace_back("move "+rd+" $v0");
             Registers.dirt(rd);
             break;
@@ -214,7 +214,7 @@ void newObjectCode ::addCode(struct tetraCode * midCode) {
         case READ_C:{
             mips.emplace_back("li $v0 12");
             mips.emplace_back("syscall");
-            string rd = Registers.alloc(midCode->rd, &relative_address, midCode, mips);
+            string rd = Registers.alloc(midCode->rd, &relative_address, midCode, mips, false);
             mips.emplace_back("move "+rd+" $v0");
             Registers.dirt(rd);
             break;
@@ -244,9 +244,9 @@ void newObjectCode ::addCode(struct tetraCode * midCode) {
             while (*tmp != ':') tmp++;
             tmp++;
             if (strcmp(tmp, "\\n") == 0) {
-                mips.emplace_back("li $a0 10");
-                mips.emplace_back("li $v0 11");
-                mips.emplace_back("syscall");
+                //mips.emplace_back("li $a0 10");
+                //mips.emplace_back("li $v0 11");
+                //mips.emplace_back("syscall");
                 break;
             }
             string s = STR;
@@ -289,7 +289,7 @@ void newObjectCode ::addCode(struct tetraCode * midCode) {
 }
 void newObjectCode ::printMips() {
     ofstream outfp;
-    outfp.open("newMipsCode.txt");
+    outfp.open("MipsCode.txt");
     for(string s:mips) outfp<<s<<endl;
     outfp << "addi $fp $fp " << end_golbal_address << endl;
     Registers.clearTemp(mips);
